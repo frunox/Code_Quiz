@@ -1,5 +1,6 @@
 // declare variables for existing HTML elements
 var ol = document.querySelector('ol');
+var li = document.querySelector('li');
 var h1 = document.querySelector("h1");
 var p = document.querySelector('p');
 var button = document.querySelector('button');
@@ -27,7 +28,6 @@ function displayQuestion() {
     button.style.display ="none";
     // replace text with a question;
     p.innerHTML = questions[questionsIndex];
-    questionsIndex++;
     for(var i = 0; i < 4; i++) {
         // create list items for answers
         var li = document.createElement("li");
@@ -46,18 +46,22 @@ function checkAnswer(id) {
     // display the hr
     hr.style.display = 'block';
     // check for correct answer
-    if(id == 2) {
+    console.log('qIndex: ' + questionsIndex + '  answer index: ' + correctAnswersId[answersIndex]);
+    if(id == correctAnswersId[questionsIndex]) {
         comeback.innerHTML = "Correct!";
         userPoints += 5;
     } else {
         comeback.innerHTML = "Wrong";
+        // take 10 seconds off the timer
     }
+    questionsIndex++;
     answersIndex += 4;
     if(answersIndex >= answers.length) {
         console.log('go to allDone()');
         // clear answers list
         while(ol.firstChild) {
-            ol.removeChild(ol.firstChild);
+            ol.removeChild(ol.firstChild); 
+            console.log('in remove li loop');
         }
         allDone();
     }
@@ -68,14 +72,10 @@ function allDone() {
     
     // hide the <p>
     p.style.display = 'none';
+    hr.style.display = 'none';
+    comeback.innerHTML = '';
     // add text to the h2
     h2.innerHTML = "All done!";
     console.log('in allDone()');
     
 }
-
-
-    
-    
-    
-    
