@@ -77,10 +77,11 @@ ol {
 }
   /* list of answers */
 li {
-  width: 30%;
+  /* width: 30%; */
   text-align: left;
   border-radius: 5px;
-  height: 25px;
+  /* height: 25px; */
+  display: table;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 120px;
@@ -96,5 +97,10 @@ li:hover {
 
 /* RESPONSE */
 hr {
-  visibility: hidden;
+  display: none;
+  width: 50%;
+}
+
+#comeBack {
+  margin-left: 45%;
 }
