@@ -1,0 +1,100 @@
+body {
+  font-family: "Arial";
+  font-size: 16px;
+}
+/* START PAGE CONTENT */
+main {
+  box-sizing: border-box;
+  position: relative;
+}
+/* START HEADER */
+.header {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 5px 5px;
+}
+
+.header a {
+  /* float: right; */
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.highScores {
+  position: left;
+}
+
+.header-right {
+  float: right;
+}
+
+/* START PAGE */
+.content {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* p {
+  text-align: center;
+} */
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  border-radius: 7px;
+}
+/* END START PAGE */
+
+/* START QUESTION PAGES */
+p .question {
+  color: pink;
+}
+
+input {
+  height: 50px;
+  width: 100%;
+  padding: 6px;
+  margin-top: 10px;
+  font-size: 2.4em;
+  border: none;
+}
+  /* ordered list */
+ol {
+  /* list-style-type: none; */
+  padding: 0;
+  background-color: white;
+}
+  /* list of answers */
+li {
+  width: 30%;
+  text-align: left;
+  border-radius: 5px;
+  height: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 120px;
+  padding: 5px;
+  background-color: #5a3ebe;
+  color: white;
+  font-size: 1.5em;
+}
+
+li:hover {
+  background-color: rgb(18, 31, 75);
+}
+
+/* RESPONSE */
+hr {
+  visibility: hidden;
+}
