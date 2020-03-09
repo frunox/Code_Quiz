@@ -37,19 +37,15 @@
         <form class="form" action="#">
           <label for="inits">Enter Your Initials:</label>
           <input class="box" type="text" id="fname" name="inits">
-          <input class="submit" type="submit" name="inits" onclick="showScore()">
+          <input class="submit" type="submit" name="inits" onclick="highScores()">
         </form>
+      </section>
+      <section class="scores">
+        <button id="goBack" class="scoreBtn" onclick="">Go Back</button>
+        <button id="clear" class="scoreBtn" onclick="">Clear High Scores</button>
       </section>
 
     </main>
-      <!-- div class="todos">
-      <form id="todo-form" method="POST">
-        <label for="todo-text">Add a Todo:</label>
-        <input type="text" placeholder="What needs to be done?" name="todo-text" id="todo-text" />
-      </form>
-      <p>Todo Count: <span id="todo-count">0</span></p>
-      <ul id="todo-list"></ul>
-    </div> -->
     <script src="assets/script.js"></script>
   </body>
 </html>

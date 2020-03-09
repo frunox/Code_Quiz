@@ -109,9 +109,10 @@ hr {
 }
 
 .form {
-  align-items: center;  
+  align-items: center; 
+  text-align: center; 
   height: 20px;
-  width: 200px;
+  /* width: 200px; */
   padding: 2px;
   margin-top: 10px;
   font-size: 1em;
@@ -128,6 +129,10 @@ input {
 
 .submit {
   height: 20px;
-  border-radius: 3px;
+  border-radius: 4px;
+}
+
+.scores {
+  display: none;
 }
 

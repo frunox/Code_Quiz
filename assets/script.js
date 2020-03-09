@@ -3,11 +3,12 @@ var ol = document.querySelector('ol');
 var li = document.querySelector('li');
 var h1 = document.querySelector("h1");
 var p = document.querySelector('p');
-var button = document.querySelector('button');
+var startBtn = document.querySelector('#start');
 var hr = document.querySelector('hr');
 var h2 = document.querySelector('h2');
 var startMessage = document.querySelector('.startMessage');
 var comeback = document.querySelector('#comeBack');
+var scoreButtons = document.querySelector('.scores');
 // var label = document.querySelector('label');
 var input = document.querySelector('.done');
 // var boxName = document.getElementById('boxName');
@@ -59,7 +60,7 @@ function displayQuestion() {
     // hide the h1
     h1.style.display = 'none';
     // hide button
-    button.style.display ="none";
+    startBtn.style.display ="none";
     // replace text with a question;
     p.innerHTML = questions[questionsIndex];
     
@@ -103,6 +104,12 @@ function allDone() {
 
 function highScores() {
     console.log("in highScores()");
+    h1.style.display = 'block';
+    h1.innerHTML = "High Scores";
+    p.style.display = 'none';
+    startBtn.style.display = 'none'
+    scoreButtons.style.display = 'inline-block';
+
 }
 
 function showScore() {
