@@ -11,9 +11,9 @@
 
     <!-- create header -->
     <header class="header">
-      <a href="#" class="highScores">View High Scores</a>
+      <a href="#" class="highScores" onclick="highScores()">View High Scores</a>
       <div class="header-right">
-        <a class="active" href="#">Timer</a>
+        <a class="timer">Timer</a>
       </div>
     </header>
     <!-- Render starting page -->
@@ -21,20 +21,25 @@
       
       <section class ="content">
         <h1 class='heading'>Coding Quiz Challenge</h1>
-        <h2></h2>
-        <p>Try to answer the following code-related challenges within the time limit.  Keep in mind that incorrect answers will penalize your score time by 10 seconds.</p>
+        <h2 class="message"></h2>
+        <p class="startMessage">Try to answer the following code-related challenges within the time limit.  Keep in mind that incorrect answers will penalize your score time by 10 seconds.</p>
         <!-- provide element for answers -->
-        <ol id="answers"></ol>  
+        <div>
+          <ol id="answers"></ol>
+        </div>  
         <button id="start" class="btn" onclick="displayQuestion()">Start Quiz</button>
       </section>
       <section class="response">
         <hr />
         <p id="comeBack"></p>
       </section>
-      <section>
-        <label></label>
-        <input type="text" id="initials" />
-      </section>
+      <!-- <section class="done">
+        <form class="form" action="#">
+          <label for="fname">Enter Your Initials:</label>
+          <input class="box" type="text" id="fname" name="fname">
+          <input type="submit" value="Submit">
+        </form>
+      </section> -->
 
     </main>
       <!-- div class="todos">

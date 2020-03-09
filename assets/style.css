@@ -104,3 +104,21 @@ hr {
 #comeBack {
   margin-left: 45%;
 }
+
+/* 'ALL DONE' PAGE */
+.done {
+  align-items: center;
+  display: none;
+}
+
+/* .form {
+  align-items: center;  
+  height: 20px;
+  width: 200px;
+  padding: 2px;
+  margin-top: 10px;
+  align-items: center;
+  font-size: 1em;
+  border: 1px solid black;
+} */
+
