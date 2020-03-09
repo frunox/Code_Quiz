@@ -9,7 +9,7 @@ var h2 = document.querySelector('h2');
 var startMessage = document.querySelector('.startMessage');
 var comeback = document.querySelector('#comeBack');
 // var label = document.querySelector('label');
-// var input = document.getElementsByClassName('done');
+var input = document.querySelector('.done');
 // var boxName = document.getElementById('boxName');
 var item = document.getElementsByClassName('listItem');
 var questionsIndex = 0;
@@ -71,6 +71,7 @@ function displayQuestion() {
             p.style.display = 'none';
             hr.style.display = 'none';
             h2.innerHTML = "All done!";
+            input.style.display = 'block';
             comeback.innerHTML = "Your final score is:  " + userPoints;
             break;
         }
@@ -102,4 +103,8 @@ function allDone() {
 
 function highScores() {
     console.log("in highScores()");
+}
+
+function showScore() {
+    console.log("in showScores()");
 }
