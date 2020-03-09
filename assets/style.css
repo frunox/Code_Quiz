@@ -104,7 +104,9 @@ hr {
 
 /* 'ALL DONE' PAGE */
 .done {
-  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
   display: none;
 }
 
@@ -133,6 +135,8 @@ input {
 }
 
 .scores {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
   display: none;
 }
-
