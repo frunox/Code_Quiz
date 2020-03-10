@@ -9,6 +9,8 @@ var h2 = document.querySelector('h2');
 var startMessage = document.querySelector('.startMessage');
 var comeback = document.querySelector('#comeBack');
 var scoreButtons = document.querySelector('.scores');
+var form = document.querySelector('.form');
+
 // var label = document.querySelector('label');
 var input = document.querySelector('.done');
 // var boxName = document.getElementById('boxName');
@@ -41,8 +43,11 @@ function checkAnswer(id) {
         comeback.innerHTML = "Wrong";
     }
     questionsIndex++;
+    // TODO: pause (setTimeout)
+    // "setTimeout('displayQuestion()', 2000)"
     // to function to display the question and possible answers
-    displayQuestion();
+    // displayQuestion();
+    pause();
 }
 
 // display the questions and possible answers
@@ -72,7 +77,7 @@ function displayQuestion() {
             li.innerHTML = answers[questionsIndex][i];
             ol.append(li);
         }
-    // TODO: pause (setTimeout)    
+        
     }
 }    
 
@@ -81,6 +86,7 @@ function allDone() {
     // remove unnecessary tags
     p.style.display = 'none';
     hr.style.display = 'none';
+    form.style.display = 'block';
     // insert message for this page
     h2.innerHTML = "All done!";
     // show score
@@ -120,6 +126,7 @@ function reset() {
     h2.style.display = "block";
     // don't show the buttons
     scoreButtons.style.display = 'none';
+    form.style.display = 'none';
     // go back to first question
     displayQuestion();
 }
@@ -134,4 +141,11 @@ function removeLi() {
         ol.removeChild(ol.firstChild);
     }
     return;
+}
+
+function pause() {
+    scoreButtons.style.display = 'none';
+    h2.style.display = 'block';
+    comeback.style.display = 'block';
+    var pause = setTimeout('displayQuestion()', 2000);
 }
