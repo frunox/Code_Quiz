@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/style.css" />
     <title>Code Quiz</title>
   </head>
-  <body>
+  <body id="reset">
 
     <!-- create header -->
     <header class="header">
@@ -41,8 +41,8 @@
         </form>
       </section>
       <section class="scores">
-        <button id="goBack" class="scoreBtn" onclick="">Go Back</button>
-        <button id="clear" class="scoreBtn" onclick="">Clear High Scores</button>
+        <button id="goBack" class="scoreBtn" onclick="reset()">Go Back</button>
+        <button id="clear" class="scoreBtn" onclick="clearScores()">Clear High Scores</button>
       </section>
 
     </main>

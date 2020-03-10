@@ -49,12 +49,13 @@ function checkAnswer(id) {
 function displayQuestion() {
     // clear any previous answers
     removeLi();
-    // hide the h1
+    // hide the h1 and p tags
     h1.style.display = 'none';
+    p.style.display = 'none'
     // hide start button
     startBtn.style.display ="none";
     // put the question into the p tag
-    p.innerHTML = questions[questionsIndex];
+    h2.innerHTML = questions[questionsIndex];
     // loop to create list of answers for each question, go to allDone() when all questions are answered
     for(var i = 0; i < 4; i++) {
         // console.log("i: " + i + "  questionsIndex: " + questionsIndex);
@@ -106,8 +107,25 @@ function highScores() {
     //  show buttons
     // TODO: place high scored, don't show initial input
     scoreButtons.style.display = 'inline-block';
-    // TODO:  set Go Back button properly
     // TODO:  clear the scores
+}
+
+// reset question counter and points, prepare display, go back to first question
+function reset() {
+    // reset points
+    userPoints = 0;
+    // go back to the first question
+    questionsIndex = 0;
+    // display the h2 element to show the question
+    h2.style.display = "block";
+    // don't show the buttons
+    scoreButtons.style.display = 'none';
+    // go back to first question
+    displayQuestion();
+}
+
+function clearScores() {
+    console.log("in clearScores()");
 }
 
 // remove the li tags that show the answers for the previous(or last) question
@@ -115,6 +133,5 @@ function removeLi() {
     while(ol.firstChild) {
         ol.removeChild(ol.firstChild);
     }
-    console.log("in removeLi()");
     return;
 }
