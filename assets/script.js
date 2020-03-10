@@ -1,3 +1,4 @@
+// CALCULATED HIGHEST SCORE - STILL NEED TO DISPLAY
 // declare variables for existing HTML elements
 var ol = document.querySelector('ol');
 var li = document.querySelector('li');
@@ -10,6 +11,7 @@ var startMessage = document.querySelector('.startMessage');
 var comeback = document.querySelector('#comeBack');
 var scoreButtons = document.querySelector('.scores');
 var form = document.querySelector('.form');
+var submitBtn = document.querySelector('.submit');
 
 // var label = document.querySelector('label');
 var input = document.querySelector('.done');
@@ -19,6 +21,13 @@ var questionsIndex = 0;
 var answersIndex = 0;
 var userPoints = 0;
 var id;
+var scores = [];
+var index;
+
+// read in scores from local storage and initialize array scores
+createArray();
+
+
 // set up arrays with the questions and potential answers to each question
 var questions = ['Commonly used data types DO NOT include:', 'The condition in an if/else statement is enclosed within ________.', 'Arrays in JavaScript can be used to store ________.', 'String values must be enclosed within _______ when being assigned to variables.', 'A very useful too used during development and debugging for printing content to the debugger is:']
 var answers = [
@@ -31,6 +40,20 @@ var answers = [
 var correctAnswersId = [2, 2, 3, 2, 3]
 
 // FUNCTIONS
+// read local storage to string element, convert to array
+function createArray() {
+    var list = localStorage.getItem('Scores');
+    // if local storage is empty, it returns an empty string, so reset array to empty.
+    if(list === ""){
+        scores = [];
+    } else {
+        // list is a string - splice it into an array
+        scores = list.split(',');
+    }
+    console.log(scores);
+    return;
+}
+
 // check if answer is correct or not
 function checkAnswer(id) {
     // display the hr
@@ -42,11 +65,9 @@ function checkAnswer(id) {
     } else {
         comeback.innerHTML = "Wrong";
     }
+    // access the next question
     questionsIndex++;
-    // TODO: pause (setTimeout)
-    // "setTimeout('displayQuestion()', 2000)"
-    // to function to display the question and possible answers
-    // displayQuestion();
+    // have a short pause before calling displayQuestion();
     pause();
 }
 
@@ -93,7 +114,6 @@ function allDone() {
     comeback.innerHTML = "Your final score is:  " + userPoints;
     // display input box for initials
     input.style.display = 'block';
-    //  TODO: capture initials, save with score to local memory
 }
 
 // show high scores
@@ -106,14 +126,31 @@ function highScores() {
     comeback.style.display = 'none';
     p.style.display = 'none';
     startBtn.style.display = 'none'
+    form.style.display = 'none'
     // show title for this page
     h1.style.display = 'block';
     h1.innerHTML = "High Scores";
     // TODO:  find highest score and display initials and score
+    // highestScore();
+    console.log(index);
     //  show buttons
-    // TODO: place high scored, don't show initial input
     scoreButtons.style.display = 'inline-block';
-    // TODO:  clear the scores
+}
+
+// sort through array of scores and find the highest value
+function highestScore() {
+    console.log("scores  " + scores[1]);
+    var best = 0;
+    for(var i = 1; i < scores.length; i += 2) {
+        var current = scores[i];
+        console.log("current  " + current); 
+        if(current > best){
+             best = current;
+             index = i;
+        }
+    }
+    console.log(index);
+    // return index;
 }
 
 // reset question counter and points, prepare display, go back to first question
@@ -133,6 +170,8 @@ function reset() {
 
 function clearScores() {
     console.log("in clearScores()");
+    localStorage.clear();
+    return;
 }
 
 // remove the li tags that show the answers for the previous(or last) question
@@ -147,5 +186,35 @@ function pause() {
     scoreButtons.style.display = 'none';
     h2.style.display = 'block';
     comeback.style.display = 'block';
-    var pause = setTimeout('displayQuestion()', 2000);
+    var pause = setTimeout('displayQuestion()', 500);
 }
+
+// EVENT LISTENERS
+
+submitBtn.addEventListener("click", function (){
+    event.preventDefault();
+    // capture initials
+    var initials = document.querySelector(".box").value;
+    console.log("initials:  " + initials + "  points " + userPoints);
+    // push the pair to the array
+    scores.push(initials, userPoints);
+    highestScore();
+    console.log(scores);
+    // set local storage
+    // TODO: check if entry is valid
+    // if(todos[todos.length - 1] === ""){
+    //     todos.pop();
+    //     alert("Please enter a new task");
+    // }
+
+    // update local storage
+    localStorage.setItem("Scores", scores);
+    // // clear the text in the input box
+    // document.getElementById('todo-form').reset();
+    // // clear the list
+    // while(todoList.firstChild) {
+    //     todoList.removeChild(todoList.firstChild);
+    // }
+    highScores();
+    
+})
