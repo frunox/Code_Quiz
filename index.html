@@ -13,7 +13,7 @@
     <header class="header">
       <a href="#" class="highScores" onclick="highScores()">View High Scores</a>
       <div class="header-right">
-        <a class="timer">Timer</a>
+        <a class="timer" id="timer">Timer</a>
       </div>
     </header>
     <!-- Render starting page -->
@@ -22,7 +22,7 @@
       <section class ="content">
         <h1 class='heading'>Coding Quiz Challenge</h1>
         <h2 class="message"></h2>
-        <p class="startMessage">Try to answer the following code-related challenges within the time limit.  Keep in mind that incorrect answers will penalize your score time by 10 seconds.</p>
+        <p class="startMessage">Try to answer the following code-related challenges within the time limit.  Correct answers are worth 10 points.  Keep in mind that incorrect answers will reduce your score by 2 points and decrease the time by 5 seconds.</p>
         <!-- provide element for answers -->
         <div>
           <ol id="answers"></ol>

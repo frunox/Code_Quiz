@@ -23,6 +23,8 @@ var userPoints = 0;
 var id;
 var scores = [];
 var index;
+    // start and stop values for the timer
+var clock = 55;
 
 // read in scores from local storage and initialize array scores
 createArray();
@@ -44,15 +46,41 @@ var correctAnswersId = [2, 2, 3, 2, 3]
 function createArray() {
     var list = localStorage.getItem('Scores');
     // if local storage is empty, it returns an empty string, so reset array to empty.
-    if(list === ""){
+    if(list === null){
         scores = [];
     } else {
         // list is a string - splice it into an array
         scores = list.split(',');
     }
-    console.log(scores);
     return;
 }
+
+function startTimer() {
+    
+    // initiate timer    
+    var countDown = setInterval(function() {
+        // if all questions are answered with time remaining, stop the timer
+        if(clock === -1) {
+            return;
+        }
+        if(clock > 0) {
+            clock += -1;
+            console.log(clock);
+            document.getElementById('timer').innerHTML = "Time Remaining:  " + clock;
+        } else {
+            // stop clock
+            clearInterval(countDown);
+            gameOver();
+        }
+    }, 1000);
+   
+}
+    
+    
+function gameOver() {
+    console.log('in gameOver');
+}
+
 
 // check if answer is correct or not
 function checkAnswer(id) {
@@ -61,9 +89,11 @@ function checkAnswer(id) {
     // check for correct answer
     if(id == correctAnswersId[questionsIndex]) {
         comeback.innerHTML = "Correct!";
-        userPoints += 5;
+        userPoints += 10;
     } else {
         comeback.innerHTML = "Wrong";
+        userPoints += -2;
+        clock += -5;
     }
     // access the next question
     questionsIndex++;
@@ -73,6 +103,9 @@ function checkAnswer(id) {
 
 // display the questions and possible answers
 function displayQuestion() {
+    // start the timer
+    startTimer();
+
     // clear any previous answers
     removeLi();
     // hide the h1 and p tags
@@ -88,6 +121,8 @@ function displayQuestion() {
         if(questionsIndex === answers.length){
             console.log("go to allDone()");
             removeLi();
+            clock = -1;
+            document.getElementById('timer').innerHTML = "Timer";
             allDone();
         } else {
             // create list items for answers
@@ -130,9 +165,9 @@ function highScores() {
     // show title for this page
     h1.style.display = 'block';
     h1.innerHTML = "High Scores";
-    // TODO:  find highest score and display initials and score
-    // highestScore();
-    console.log(index);
+    // TODO:  display initials and score
+    highestScore();
+    console.log("highest score index:  " + index);
     //  show buttons
     scoreButtons.style.display = 'inline-block';
 }
@@ -149,8 +184,8 @@ function highestScore() {
              index = i;
         }
     }
-    console.log(index);
-    // return index;
+    // console.log(index);
+    return index;
 }
 
 // reset question counter and points, prepare display, go back to first question
@@ -186,7 +221,7 @@ function pause() {
     scoreButtons.style.display = 'none';
     h2.style.display = 'block';
     comeback.style.display = 'block';
-    var pause = setTimeout('displayQuestion()', 500);
+    var pause = setTimeout('displayQuestion()', 750);
 }
 
 // EVENT LISTENERS
@@ -200,21 +235,7 @@ submitBtn.addEventListener("click", function (){
     scores.push(initials, userPoints);
     highestScore();
     console.log(scores);
-    // set local storage
-    // TODO: check if entry is valid
-    // if(todos[todos.length - 1] === ""){
-    //     todos.pop();
-    //     alert("Please enter a new task");
-    // }
-
-    // update local storage
+    // add to local storage
     localStorage.setItem("Scores", scores);
-    // // clear the text in the input box
-    // document.getElementById('todo-form').reset();
-    // // clear the list
-    // while(todoList.firstChild) {
-    //     todoList.removeChild(todoList.firstChild);
-    // }
     highScores();
-    
-})
+});
