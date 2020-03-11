@@ -61,6 +61,8 @@ function startTimer() {
     var countDown = setInterval(function() {
         // if all questions are answered with time remaining, stop the timer
         if(clock === -1) {
+            document.getElementById('timer').innerHTML = "Timer";
+            clearInterval(countDown);
             return;
         }
         if(clock > 0) {
@@ -111,7 +113,6 @@ function checkAnswer(id) {
 function displayQuestion() {
     // start the timer
     startTimer();
-
     // clear any previous answers
     removeLi();
     // hide the h1 and p tags, start button
@@ -145,12 +146,11 @@ function displayQuestion() {
 
 // show final score and enter initials to save score
 function allDone() {
-    // show any previous scores for this user
-    
     // remove unnecessary tags
     p.style.display = 'none';
     hr.style.display = 'none';
     form.style.display = 'block';
+    comeback.style.display = 'block';
     // insert message for this page
     h2.innerHTML = "All done!";
     // show score
@@ -161,13 +161,13 @@ function allDone() {
 
 // find all scores for the player and show them
 function findPlayerScores() {
+    currentPlayerIndex = [];
     var player = scores[scores.length - 2];
     console.log("player:  " + player);
     for(var i = 0; i < scores.length; i += 2) {
         var previousPlayer = scores[i];
         if(player === previousPlayer){
              currentPlayerIndex.push(i);
-             console.log(scores[i] + "  " + scores[i + 1]);
         }
     }
     console.log("CPIndex: " + currentPlayerIndex);
@@ -176,20 +176,31 @@ function findPlayerScores() {
 
 // show high scores
 function highScores() {
+    // stop the timer
+    clock = -1;
     // remove li tags
     removeLi();
+    p.style.display = 'block';
+    p.innerHTML = "something";
+    // if(currentPlayerIndex.length > 0) {
+        console.log("highest score index:  " + index);
+        var highScore = document.createElement('h2');
+        highScore.setAttribute("class", "highScore");
+        highScore.innerHTML = "The Current High Score Is: " + scores[index];
+        document.querySelector('body').appendChild(highScore);
+    // }
     // render a heading for your 'Previous Scores'
-    console.log(currentPlayerIndex.length);
-    if(currentPlayerIndex.length > 0) {
-        h2.style.display = 'block';
-        h2.innerHTML = "Your Previous Scores";
-    }
+    // if(currentPlayerIndex.length > 0) {
+    //     h2.style.display = 'block';
+    //     h2.innerHTML = "Your Previous Scores";
+    // }
     
     // render previous scores for current player
+    h2.style.display = 'block';
+    h2.innerHTML = "Previous Scores for " + scores[currentPlayerIndex[0]];
     for(var i = 0; i < currentPlayerIndex.length - 1; i++) {
         var inits = scores[currentPlayerIndex[i]];
         var prevScore = scores[currentPlayerIndex[i] + 1];
-        console.log("inits:  " + inits + "  " + prevScore);
         var li = document.createElement("li");
         li.setAttribute("class", "previousScores");
         li.innerHTML = "Player:  " + inits + "   " + "Previous Score:  " + prevScore;
@@ -207,7 +218,7 @@ function highScores() {
     h1.innerHTML = "High Scores";
     // TODO:  display initials and score
     highestScore();
-    console.log("highest score index:  " + index);
+    
     //  show buttons
     scoreButtons.style.display = 'inline-block';
 }
@@ -232,6 +243,8 @@ function reset() {
     userPoints = 0;
     // go back to the first question
     questionsIndex = 0;
+    // reset timer
+    clock = 55;
     // display the h2 element to show the question
     h2.style.display = "block";
     // don't show the buttons

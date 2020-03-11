@@ -1,3 +1,5 @@
+_Submitted by John Cannon (March 10, 2020)_
+
 # 04 Web APIs: Code Quiz
 
 This project creates a coding assessment, a combination of multiple-choice questions and interactive challenges. It includes a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
@@ -26,17 +28,12 @@ WHEN all questions are answered or the timer reaches 0, THEN the game is over
 WHEN the game is over, THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
 
-### Review
-
-You are required to submit the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+### Notes
+* The acceptance criteria were met.
+* However, I wasn't able to properly display the current high score, nor could I get a header over the list of previous scores for the player.
+* This means my DOM manipulation skills are still weak.
+* The high score is undefined when I hit the 'View High Scores' button before all the questions are answered.  I don't understand why since the button calls the function that determines the high score.
+* I added a pause after answering each question so the player can see if the selected answer is correct or not.
+ 

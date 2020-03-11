@@ -168,4 +168,8 @@ input {
   display: none;
 }
 
+/* High Scores */
+body .highScores {
+  position-left: 100px;
+}
 
