@@ -23,12 +23,12 @@ var userPoints = 0;
 var id;
 var scores = [];
 var index;
+var currentPlayerIndex = [];
     // start and stop values for the timer
 var clock = 55;
 
 // read in scores from local storage and initialize array scores
 createArray();
-
 
 // set up arrays with the questions and potential answers to each question
 var questions = ['Commonly used data types DO NOT include:', 'The condition in an if/else statement is enclosed within ________.', 'Arrays in JavaScript can be used to store ________.', 'String values must be enclosed within _______ when being assigned to variables.', 'A very useful too used during development and debugging for printing content to the debugger is:']
@@ -55,8 +55,8 @@ function createArray() {
     return;
 }
 
+// start the timer
 function startTimer() {
-    
     // initiate timer    
     var countDown = setInterval(function() {
         // if all questions are answered with time remaining, stop the timer
@@ -65,7 +65,6 @@ function startTimer() {
         }
         if(clock > 0) {
             clock += -1;
-            console.log(clock);
             document.getElementById('timer').innerHTML = "Time Remaining:  " + clock;
         } else {
             // stop clock
@@ -76,9 +75,15 @@ function startTimer() {
    
 }
     
-    
+// stop the game if the timer runs out    
 function gameOver() {
-    console.log('in gameOver');
+    document.querySelector('.header').style.display = "none";
+    hr.style.display = 'none';
+    comeback.style.display = 'none';
+    removeLi();
+    h1.style.display = "block";
+    h1.innerHTML = "Game Over!  The timer ran out."
+    h2.innerHTML = "Please try again later after you've had some coffee."
 }
 
 
@@ -86,6 +91,7 @@ function gameOver() {
 function checkAnswer(id) {
     // display the hr
     hr.style.display = 'block';
+    comeback.style.display = 'block';
     // check for correct answer
     if(id == correctAnswersId[questionsIndex]) {
         comeback.innerHTML = "Correct!";
@@ -108,12 +114,14 @@ function displayQuestion() {
 
     // clear any previous answers
     removeLi();
-    // hide the h1 and p tags
+    // hide the h1 and p tags, start button
     h1.style.display = 'none';
     p.style.display = 'none'
-    // hide start button
     startBtn.style.display ="none";
-    // put the question into the p tag
+    // hide the hr and comeback
+    hr.style.display = 'none';
+    comeback.style.display = 'none';
+    // put the question into the h2 tag
     h2.innerHTML = questions[questionsIndex];
     // loop to create list of answers for each question, go to allDone() when all questions are answered
     for(var i = 0; i < 4; i++) {
@@ -133,12 +141,13 @@ function displayQuestion() {
             li.innerHTML = answers[questionsIndex][i];
             ol.append(li);
         }
-        
     }
 }    
 
 // show final score and enter initials to save score
 function allDone() {
+    // show any previous scores for this user
+    
     // remove unnecessary tags
     p.style.display = 'none';
     hr.style.display = 'none';
@@ -151,10 +160,38 @@ function allDone() {
     input.style.display = 'block';
 }
 
+// find all scores for the player and show them
+function findPlayerScores() {
+    
+    var player = scores[scores.length - 2];
+    console.log("player:  " + player);
+    for(var i = 0; i < scores.length; i += 2) {
+        var previousPlayer = scores[i];
+        console.log("previousplayer  " + previousPlayer); 
+        if(player === previousPlayer){
+             currentPlayerIndex.push(i);
+        }
+    }
+    console.log("CPIndex: " + currentPlayerIndex);
+    return currentPlayerIndex;
+}
+
 // show high scores
 function highScores() {
     // remove li tags
     removeLi();
+    // render a heading for your 'Previous Scores'
+
+    // render previous scores for current player
+    for(var i = 0; i < currentPlayerIndex.length; i++) {
+        var inits = scores[currentPlayerIndex[i]];
+        var prevScore = scores[currentPlayerIndex[i + 1]];
+        var li = document.createElement("li");
+        li.setAttribute("id", i);
+        li.setAttribute("class", "previousScores");
+        li.innerHTML = inits + "  " + prevScore;
+        ol.append(li);
+    }
     // remove unnecessary tags
     h2.style.display = 'none';
     hr.style.display = 'none';
@@ -230,12 +267,14 @@ submitBtn.addEventListener("click", function (){
     event.preventDefault();
     // capture initials
     var initials = document.querySelector(".box").value;
-    console.log("initials:  " + initials + "  points " + userPoints);
     // push the pair to the array
     scores.push(initials, userPoints);
+    // find any previous scores for current player
+    findPlayerScores();
+    // show highest score and previous scores for current player
     highestScore();
-    console.log(scores);
     // add to local storage
     localStorage.setItem("Scores", scores);
+   
     highScores();
 });
