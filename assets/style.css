@@ -72,12 +72,25 @@ ol {
   padding: 0;
   background-color: white;
 }
+
+/* Previous scores for player */
+li .previousScores {
+  text-align: left;
+  /* border-radius: 5px; */
+  display: table;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 120px;
+  padding: 5px;
+  /* background-color: #5a3ebe; */
+  /* color: white; */
+  font-size: 1.2em;
+}
+
   /* list of answers */
-li {
-  /* width: 30%; */
+.listItem {
   text-align: left;
   border-radius: 5px;
-  /* height: 25px; */
   display: table;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -90,6 +103,20 @@ li {
 
 li:hover {
   background-color: rgb(18, 31, 75);
+}
+
+/* Previous scores for player */
+.previousScores {
+  text-align: left;
+  /* border-radius: 5px; */
+  display: table;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 120px;
+  padding: 5px;
+  /* background-color: #5a3ebe; */
+  /* color: white; */
+  font-size: 1.2em;
 }
 
 /* RESPONSE */
@@ -140,3 +167,5 @@ input {
   text-align: center;
   display: none;
 }
+
+

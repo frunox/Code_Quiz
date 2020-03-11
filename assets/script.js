@@ -127,7 +127,6 @@ function displayQuestion() {
     for(var i = 0; i < 4; i++) {
         // console.log("i: " + i + "  questionsIndex: " + questionsIndex);
         if(questionsIndex === answers.length){
-            console.log("go to allDone()");
             removeLi();
             clock = -1;
             document.getElementById('timer').innerHTML = "Timer";
@@ -162,14 +161,13 @@ function allDone() {
 
 // find all scores for the player and show them
 function findPlayerScores() {
-    
     var player = scores[scores.length - 2];
     console.log("player:  " + player);
     for(var i = 0; i < scores.length; i += 2) {
         var previousPlayer = scores[i];
-        console.log("previousplayer  " + previousPlayer); 
         if(player === previousPlayer){
              currentPlayerIndex.push(i);
+             console.log(scores[i] + "  " + scores[i + 1]);
         }
     }
     console.log("CPIndex: " + currentPlayerIndex);
@@ -181,15 +179,20 @@ function highScores() {
     // remove li tags
     removeLi();
     // render a heading for your 'Previous Scores'
-
+    console.log(currentPlayerIndex.length);
+    if(currentPlayerIndex.length > 0) {
+        h2.style.display = 'block';
+        h2.innerHTML = "Your Previous Scores";
+    }
+    
     // render previous scores for current player
-    for(var i = 0; i < currentPlayerIndex.length; i++) {
+    for(var i = 0; i < currentPlayerIndex.length - 1; i++) {
         var inits = scores[currentPlayerIndex[i]];
-        var prevScore = scores[currentPlayerIndex[i + 1]];
+        var prevScore = scores[currentPlayerIndex[i] + 1];
+        console.log("inits:  " + inits + "  " + prevScore);
         var li = document.createElement("li");
-        li.setAttribute("id", i);
         li.setAttribute("class", "previousScores");
-        li.innerHTML = inits + "  " + prevScore;
+        li.innerHTML = "Player:  " + inits + "   " + "Previous Score:  " + prevScore;
         ol.append(li);
     }
     // remove unnecessary tags
@@ -211,11 +214,9 @@ function highScores() {
 
 // sort through array of scores and find the highest value
 function highestScore() {
-    console.log("scores  " + scores[1]);
     var best = 0;
     for(var i = 1; i < scores.length; i += 2) {
         var current = scores[i];
-        console.log("current  " + current); 
         if(current > best){
              best = current;
              index = i;
